@@ -7,8 +7,5 @@
     // чтобы избежать пересечения с типами jest, если мы его используем
     "types": ["cypress"]
   },
-  "include": [
-    "../node_modules/cypress",
-    "./**/*.ts"
-  ]
-} 
+  "include": ["../node_modules/cypress", "./**/*.ts"]
+}

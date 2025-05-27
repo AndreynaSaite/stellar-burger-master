@@ -1,4 +1,11 @@
-import { reducer, addFillings, takeBun, deleteFillings, reorderFilling, clearFillings } from './burgerSlice';
+import {
+  reducer,
+  addFillings,
+  takeBun,
+  deleteFillings,
+  reorderFilling,
+  clearFillings
+} from './burgerSlice';
 import { v4 as uuidv4 } from 'uuid';
 import { TIngredient } from '@utils-types';
 
@@ -28,17 +35,17 @@ const mockBun: TIngredient = {
 };
 
 describe('CreateBurger reducer', () => {
-  it('должен возвращать initialState по умолчанию', () => {
+  it('возврат initialState по умолчанию', () => {
     const state = reducer(undefined, { type: '' });
     expect(state).toEqual({ bun: null, ingredients: [] });
   });
 
-  it('должен устанавливать булку при takeBun', () => {
+  it('установка булки при takeBun', () => {
     const state = reducer(undefined, takeBun(mockBun));
     expect(state.bun).toEqual(mockBun);
   });
 
-  it('должен добавлять начинку с уникальным id при addFillings', () => {
+  it('добавление начинки с уникальным id при addFillings', () => {
     const state = reducer(undefined, addFillings(mockIngredient));
     expect(state.ingredients.length).toBe(1);
     expect(state.ingredients[0]).toMatchObject({
@@ -56,7 +63,7 @@ describe('CreateBurger reducer', () => {
     expect(state.ingredients.length).toBe(0);
   });
 
-  it('должен удалять начинку по id', () => {
+  it('удалять начинку по id', () => {
     const stateWithIngredient = {
       bun: null,
       ingredients: [{ ...mockIngredient, id: 'remove-me' }]
@@ -65,7 +72,7 @@ describe('CreateBurger reducer', () => {
     expect(newState.ingredients.length).toBe(0);
   });
 
-  it('должен перемещать начинку вверх', () => {
+  it('перемещать начинку вверх', () => {
     const stateWithIngredients = {
       bun: null,
       ingredients: [
@@ -80,7 +87,7 @@ describe('CreateBurger reducer', () => {
     expect(newState.ingredients[0].id).toBe('2');
   });
 
-  it('должен очищать все ингредиенты и булку', () => {
+  it('очистка всего', () => {
     const filledState = {
       bun: mockBun,
       ingredients: [{ ...mockIngredient, id: '1' }]

@@ -1,5 +1,8 @@
 import { configureStore, AnyAction } from '@reduxjs/toolkit';
-import { reducer as ingredientsReducer, fetchIngredients } from './ingridientsSlice';
+import {
+  reducer as ingredientsReducer,
+  fetchIngredients
+} from './ingridientsSlice';
 import { TIngredient } from '@utils-types';
 
 const createTestStore = () =>
@@ -16,14 +19,14 @@ describe('ingredientSlice', () => {
     store = createTestStore();
   });
 
-  it('должно выставить isLoading в true и error в null при fetchIngredients.pending', () => {
+  it('выставить isLoading в true и error в null при fetchIngredients.pending', () => {
     store.dispatch({ type: fetchIngredients.pending.type });
     const state = store.getState().ingredients;
     expect(state.isLoading).toBe(true);
     expect(state.error).toBeNull();
   });
 
-  it('должно сохранить ошибку и выключить isLoading при fetchIngredients.rejected', () => {
+  it('сохранить ошибку и выключить isLoading при fetchIngredients.rejected', () => {
     const fakeError = 'Ошибка при загрузке';
     store.dispatch({
       type: fetchIngredients.rejected.type,
@@ -34,7 +37,7 @@ describe('ingredientSlice', () => {
     expect(state.error).toBe(fakeError);
   });
 
-  it('должно сохранить данные и выключить isLoading при fetchIngredients.fulfilled', () => {
+  it('сохранить данные и выключить isLoading при fetchIngredients.fulfilled', () => {
     const mockData: TIngredient[] = [
       {
         _id: '1',

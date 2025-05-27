@@ -14,10 +14,10 @@ module.exports = {
     '^@slices(.*)$': '<rootDir>/src/services/slices$1',
     '^@hooks(.*)$': '<rootDir>/src/hooks$1',
     '^@store$': '<rootDir>/src/services/store.ts',
-    '^@selectors(.*)$': '<rootDir>/src/services/selectors$1',
+    '^@selectors(.*)$': '<rootDir>/src/services/selectors$1'
   },
   testMatch: ['**/*.test.ts', '**/*.test.tsx'],
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
-  },
+    '^.+\\.(ts|tsx)$': 'ts-jest'
+  }
 };

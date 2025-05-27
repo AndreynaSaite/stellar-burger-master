@@ -1,10 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { reducer as orderReducer, clearCurrentOrder } from './orderSlice';
-import {
-  loadOrderByNumber,
-  loadAllOrders,
-  submitOrder
-} from './orderSlice';
+import { loadOrderByNumber, loadAllOrders, submitOrder } from './orderSlice';
 
 describe('orderSlice', () => {
   let store: ReturnType<typeof createStore>;
@@ -21,13 +17,13 @@ describe('orderSlice', () => {
   });
 
   describe('loadOrderByNumber thunk', () => {
-    it('sets loadingOne to true on pending', () => {
+    it('установка loadingOne в true при pending', () => {
       store.dispatch({ type: loadOrderByNumber.pending.type });
       const state = store.getState().orderData;
       expect(state.loadingOne).toBe(true);
     });
 
-    it('sets currentOrder on fulfilled', () => {
+    it('установка currentOrder при fulfilled', () => {
       const fakeOrder = { number: 1, name: 'Test', ingredients: [] };
       store.dispatch({
         type: loadOrderByNumber.fulfilled.type,
@@ -38,7 +34,7 @@ describe('orderSlice', () => {
       expect(state.loadingOne).toBe(false);
     });
 
-    it('resets loadingOne on rejected', () => {
+    it('сброс loadingOne при rejected', () => {
       store.dispatch({ type: loadOrderByNumber.rejected.type });
       const state = store.getState().orderData;
       expect(state.loadingOne).toBe(false);
@@ -46,9 +42,12 @@ describe('orderSlice', () => {
   });
 
   describe('loadAllOrders thunk', () => {
-    it('enables loadingList and resets failure on pending', () => {
+    it('включение loadingList и сбрасывает ошибку при pending', () => {
       const fakePrevError = { name: 'Error', message: 'Some error' };
-      store.dispatch({ type: loadAllOrders.rejected.type, error: fakePrevError });
+      store.dispatch({
+        type: loadAllOrders.rejected.type,
+        error: fakePrevError
+      });
       store.dispatch({ type: loadAllOrders.pending.type });
 
       const state = store.getState().orderData;
@@ -56,7 +55,7 @@ describe('orderSlice', () => {
       expect(state.failure).toBe(null);
     });
 
-    it('stores fetched orders on fulfilled', () => {
+    it('сохранение полученные заказы при fulfilled', () => {
       const mockOrders = [{ number: 1 }, { number: 2 }];
       store.dispatch({
         type: loadAllOrders.fulfilled.type,
@@ -68,7 +67,7 @@ describe('orderSlice', () => {
       expect(state.ordersList).toEqual(mockOrders);
     });
 
-    it('stores error on rejected', () => {
+    it('сохранение ошибку при rejected', () => {
       const fakeError = { message: 'Load failed' };
       store.dispatch({
         type: loadAllOrders.rejected.type,
@@ -82,13 +81,13 @@ describe('orderSlice', () => {
   });
 
   describe('submitOrder thunk', () => {
-    it('sets submitting flag to true on pending', () => {
+    it('устанавка submitting в true при pending', () => {
       store.dispatch({ type: submitOrder.pending.type });
       const state = store.getState().orderData;
       expect(state.submitting).toBe(true);
     });
 
-    it('sets currentOrder and clears submitting on fulfilled', () => {
+    it('устанавка currentOrder и сбрасывает submitting при fulfilled', () => {
       const payload = {
         order: { number: 999, name: 'Burger X', ingredients: [] },
         name: 'Burger X'
@@ -103,7 +102,7 @@ describe('orderSlice', () => {
       expect(state.currentOrder).toEqual(payload.order);
     });
 
-    it('resets submitting on rejected', () => {
+    it('сбрас submitting при rejected', () => {
       store.dispatch({ type: submitOrder.rejected.type });
       const state = store.getState().orderData;
       expect(state.submitting).toBe(false);
@@ -111,7 +110,7 @@ describe('orderSlice', () => {
   });
 
   describe('reducers', () => {
-    it('clears current order when clearCurrentOrder is dispatched', () => {
+    it('очистка currentOrder при вызове clearCurrentOrder', () => {
       const dummyOrder = { number: 123, name: 'Cleared' };
       store.dispatch({
         type: loadOrderByNumber.fulfilled.type,

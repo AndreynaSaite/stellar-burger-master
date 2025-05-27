@@ -9,7 +9,7 @@ describe('feedSlice', () => {
       }
     });
 
-  it('должен устанавливать флаг загрузки при pending', () => {
+  it('флаг загрузки при pending', () => {
     const store = createStore();
     store.dispatch({ type: loadFeed.pending.type });
     const state = store.getState().feed;
@@ -17,7 +17,7 @@ describe('feedSlice', () => {
     expect(state.failure).toBeNull();
   });
 
-  it('должен устанавливать ошибку при rejected', () => {
+  it('установка ошибки при rejected', () => {
     const store = createStore();
     const testError = { message: 'Ошибка загрузки' };
     store.dispatch({
@@ -29,7 +29,7 @@ describe('feedSlice', () => {
     expect(state.failure?.message).toBe(testError.message);
   });
 
-  it('должен сохранять данные при fulfilled', () => {
+  it('сохранение данных при fulfilled', () => {
     const store = createStore();
     const payload = {
       orders: [

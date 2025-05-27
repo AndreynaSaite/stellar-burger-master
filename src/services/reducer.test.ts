@@ -1,4 +1,4 @@
-import store from './store'; // путь может быть другим — поправь под себя
+import store from './store';
 import { reducer as user } from './slices/userSlice';
 import { reducer as order } from './slices/orderSlice';
 import { reducer as builder } from './slices/burgerSlice';

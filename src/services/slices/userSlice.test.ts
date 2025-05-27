@@ -1,12 +1,12 @@
 import { describe, it, expect } from '@jest/globals';
 import { configureStore } from '@reduxjs/toolkit';
-import { reducer as authReducer, retrieveUser } from './userSlice'; // корректный импорт редьюсера и thunk
+import { reducer as authReducer, retrieveUser } from './userSlice';
 
 const setupStore = () =>
   configureStore({
     reducer: {
-      auth: authReducer,
-    },
+      auth: authReducer
+    }
   });
 
 describe('Тесты экшенов пользователя (authSlice)', () => {
@@ -15,8 +15,6 @@ describe('Тесты экшенов пользователя (authSlice)', () =>
       const store = setupStore();
       store.dispatch({ type: retrieveUser.pending.type });
       const state = store.getState();
-      // В твоём слайсе в таком состоянии нет isLoading,
-      // но authChecked остаётся false, authErrors не меняется
       expect(state.auth.authChecked).toBe(false);
       expect(state.auth.authErrors.login).toBeUndefined();
       expect(state.auth.authErrors.register).toBeUndefined();
@@ -28,25 +26,29 @@ describe('Тесты экшенов пользователя (authSlice)', () =>
       const state = store.getState();
       // authChecked становится true при ошибке
       expect(state.auth.authChecked).toBe(true);
-      // Ошибок в retrieveUser rejected явно нет, authErrors не меняется
+      // Ошибок в retrieveUser rejected нет, authErrors не меняется
       expect(state.auth.authErrors.login).toBeUndefined();
       expect(state.auth.authErrors.register).toBeUndefined();
     });
 
     it('Успешное получение данных пользователя', () => {
       const mockedUser = {
+      user: {
         email: 'ivan@example.com',
-        name: 'Иван Иванов',
-      };
+        name: 'Иван Иванов'
+      }
+    };
       const store = setupStore();
       store.dispatch({
         type: retrieveUser.fulfilled.type,
-        payload: mockedUser,
+        payload: mockedUser
       });
       const state = store.getState();
-      expect(state.auth.user).toEqual(mockedUser);
+      expect(state.auth.user).toEqual(mockedUser.user);
       expect(state.auth.authenticated).toBe(true);
       expect(state.auth.authChecked).toBe(true);
     });
   });
+
+
 });

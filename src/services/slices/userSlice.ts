@@ -14,6 +14,7 @@ import {
 } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { clearTokens, storeTokens } from '../../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 
 type UserState = {
   user: TUser;
@@ -48,8 +49,7 @@ export const signinUser = createAsyncThunk(
   'auth/signin',
   async (data: TLoginData) => {
     const res = await loginUserApi(data);
-    storeTokens(res.refreshToken, res.accessToken);
-    return res.user;
+    return res;
   }
 );
 
@@ -58,10 +58,7 @@ export const signoutUser = createAsyncThunk('auth/signout', async (_) => {
   clearTokens();
 });
 
-export const retrieveUser = createAsyncThunk('auth/getUser', async (_) => {
-  const res = await getUserApi();
-  return res.user;
-});
+export const retrieveUser = createAsyncThunk('user/get', getUserApi);
 
 export const editUser = createAsyncThunk(
   'auth/updateUser',
@@ -93,10 +90,11 @@ const authSlice = createSlice({
     state.addCase(signinUser.pending, (s) => {
       s.authErrors.login = undefined;
     });
-    state.addCase(signinUser.fulfilled, (s, a) => {
-      s.user = a.payload;
-      s.authenticated = true;
-      s.authErrors.login = undefined;
+    state.addCase(signinUser.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.authenticated = true;
+      setCookie('accessToken', action.payload.accessToken);
+      localStorage.setItem('refreshToken', action.payload.refreshToken);
     });
     state.addCase(signinUser.rejected, (s, a) => {
       s.authErrors.login = a.meta.rejectedWithValue
@@ -110,7 +108,7 @@ const authSlice = createSlice({
     });
 
     state.addCase(retrieveUser.fulfilled, (s, a) => {
-      s.user = a.payload;
+      s.user = a.payload.user;
       s.authenticated = true;
       s.authChecked = true;
     });

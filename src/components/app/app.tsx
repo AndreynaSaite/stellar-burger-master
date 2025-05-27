@@ -22,9 +22,17 @@ import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { fetchIngredients } from '../../services/slices/ingridientsSlice';
 import { clearCurrentOrder } from '../../services/slices/orderSlice';
 import { useAppLogic } from './useApplogic';
+import { retrieveUser } from '../../services/slices/userSlice';
 
 const App = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { location, userstate, handleModalClose } = useAppLogic();
+
+  useEffect(() => {
+    dispatch(retrieveUser());
+  }, [dispatch]);
+
   return (
     <div className={styles.app}>
       <AppHeader />

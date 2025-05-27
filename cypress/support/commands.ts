@@ -35,3 +35,10 @@
 //     }
 //   }
 // }
+Cypress.Commands.add('addFillings', (type) => {
+  cy.get(`[data-cy="${type}"]`)
+    .children()
+    .eq(0)
+    .find('button')
+    .click();
+});
