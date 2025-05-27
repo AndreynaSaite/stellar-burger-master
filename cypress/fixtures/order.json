@@ -1,0 +1,73 @@
+{
+  "success": true,
+  "order": {
+    "number": 79069,
+    "name": "Флюоресцентный метеоритный бургер",
+    "status": "done",
+    "owner": {
+      "name": "Andreyka",
+      "email": "andreykabtsr@gmail.com"
+    },
+    "ingredients": [
+      {
+        "_id": "643d69a5c3f7b9001cfa093d",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "price": 988,
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa0940",
+        "name": "Говяжий метеорит (отбивная)",
+        "type": "main",
+        "price": 3000,
+        "image_mobile": "https://code.s3.yandex.net/react/code/meat-04-mobile.png",
+        "proteins": 800,
+        "fat": 800,
+        "carbohydrates": 300,
+        "calories": 2674,
+        "image": "https://code.s3.yandex.net/react/code/meat-04.png",
+        "image_large": "https://code.s3.yandex.net/react/code/meat-04-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa0940",
+        "name": "Говяжий метеорит (отбивная)",
+        "type": "main",
+        "price": 3000,
+        "image_mobile": "https://code.s3.yandex.net/react/code/meat-04-mobile.png",
+        "proteins": 800,
+        "fat": 800,
+        "carbohydrates": 300,
+        "calories": 2674,
+        "image": "https://code.s3.yandex.net/react/code/meat-04.png",
+        "image_large": "https://code.s3.yandex.net/react/code/meat-04-large.png",
+        "__v": 0
+      },
+      {
+        "_id": "643d69a5c3f7b9001cfa093d",
+        "name": "Флюоресцентная булка R2-D3",
+        "type": "bun",
+        "price": 988,
+        "image_mobile": "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+        "proteins": 44,
+        "fat": 26,
+        "carbohydrates": 85,
+        "calories": 643,
+        "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+        "image_large": "https://code.s3.yandex.net/react/code/bun-01-large.png",
+        "__v": 0
+      }
+    ],
+    "createdAt": "2025-05-27T15:16:19.971Z",
+    "updatedAt": "2025-05-27T15:16:20.758Z",
+    "totalPrice": 8510
+  }
+}
