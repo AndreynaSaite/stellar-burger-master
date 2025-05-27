@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getIngredientsApi } from "@api";
-import { TIngredient } from "@utils-types";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getIngredientsApi } from '@api';
+import { TIngredient } from '@utils-types';
 
 // Тип состояния которое будет храниться в Redux
 type StatusIngridient = {
-  isLoading: boolean; 
+  isLoading: boolean;
   error: string | null;
   data: TIngredient[];
 };
@@ -16,7 +16,7 @@ const DefaultIngridientState: StatusIngridient = {
 };
 
 export const fetchIngredients = createAsyncThunk(
-  "ingredients/fetch",
+  'ingredients/fetch',
   async () => {
     const result = await getIngredientsApi();
     return result;
@@ -24,7 +24,7 @@ export const fetchIngredients = createAsyncThunk(
 );
 
 const ingredientSlice = createSlice({
-  name: "ingredients",
+  name: 'ingredients',
   initialState: DefaultIngridientState,
   reducers: {},
   extraReducers: function (builder) {
@@ -39,7 +39,7 @@ const ingredientSlice = createSlice({
     });
     builder.addCase(fetchIngredients.rejected, function (state, action) {
       state.isLoading = false;
-      state.error = action.error.message || "Что-то пошло не так";
+      state.error = action.error.message || 'Что-то пошло не так';
     });
   }
 });

@@ -1,7 +1,10 @@
-import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from "@api";
-import { createAsyncThunk, createSlice, SerializedError } from "@reduxjs/toolkit";
-import { TOrder } from "@utils-types";
-
+import { getOrderByNumberApi, getOrdersApi, orderBurgerApi } from '@api';
+import {
+  createAsyncThunk,
+  createSlice,
+  SerializedError
+} from '@reduxjs/toolkit';
+import { TOrder } from '@utils-types';
 
 type OrdersStatus = {
   loadingOne: boolean;
@@ -12,7 +15,6 @@ type OrdersStatus = {
   ordersList: TOrder[];
 };
 
-
 const defaultOrderStatus: OrdersStatus = {
   loadingOne: true,
   loadingList: true,
@@ -22,27 +24,21 @@ const defaultOrderStatus: OrdersStatus = {
   ordersList: []
 };
 
-
-export const loadAllOrders = createAsyncThunk(
-  'orders/loadAll',
-  async () => {
-    const result = await getOrdersApi();
-    return result;
-  }
-);
+export const loadAllOrders = createAsyncThunk('orders/loadAll', async () => {
+  const result = await getOrdersApi();
+  return result;
+});
 
 export const submitOrder = createAsyncThunk<
-  { order: TOrder; name: string },string[] >
-(
-  'orders/submit',
-  async (ingredients) => {
-    const result = await orderBurgerApi(ingredients);
-    return {
-      order: result.order,
-      name: result.name
-    };
-  }
-);
+  { order: TOrder; name: string },
+  string[]
+>('orders/submit', async (ingredients) => {
+  const result = await orderBurgerApi(ingredients);
+  return {
+    order: result.order,
+    name: result.name
+  };
+});
 
 export const loadOrderByNumber = createAsyncThunk<TOrder, number>(
   'orders/loadByNumber',
@@ -52,10 +48,8 @@ export const loadOrderByNumber = createAsyncThunk<TOrder, number>(
   }
 );
 
-
-
 const orderSlice = createSlice({
-  name: "order/data",
+  name: 'order/data',
   initialState: defaultOrderStatus,
   reducers: {
     clearCurrentOrder(state) {

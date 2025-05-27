@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice, SerializedError } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  SerializedError
+} from '@reduxjs/toolkit';
 import { getFeedsApi } from '@api';
 import { TOrdersData } from '@utils-types';
 
@@ -20,35 +24,31 @@ const defaultFeedState: FeedState = {
   }
 };
 
-export const loadFeed = createAsyncThunk(
-  'feed/load',
-  async function () {
-    const response = await getFeedsApi();
-    return response;
-  }
-);
-
+export const loadFeed = createAsyncThunk('feed/load', async function () {
+  const response = await getFeedsApi();
+  return response;
+});
 
 // Срез Redux
 const feedSlice = createSlice({
-    name: 'feed/order',
-    initialState: defaultFeedState,
-    reducers: {},
-    extraReducers: function (builder) {
-      builder.addCase(loadFeed.pending, function (status) {
-        status.loading = true;
-        status.failure = null;
-      });
-      builder.addCase(loadFeed.fulfilled, function (status, effect) {
-        status.loading = false;
-        status.failure = null;
-        status.content = effect.payload;
-      });
-      builder.addCase(loadFeed.rejected, function (status, effect) {
-        status.loading = false; 
-        status.failure = effect.error;
-      });
-    }
+  name: 'feed/order',
+  initialState: defaultFeedState,
+  reducers: {},
+  extraReducers: function (builder) {
+    builder.addCase(loadFeed.pending, function (status) {
+      status.loading = true;
+      status.failure = null;
+    });
+    builder.addCase(loadFeed.fulfilled, function (status, effect) {
+      status.loading = false;
+      status.failure = null;
+      status.content = effect.payload;
+    });
+    builder.addCase(loadFeed.rejected, function (status, effect) {
+      status.loading = false;
+      status.failure = effect.error;
+    });
+  }
 });
 
 export const reducer = feedSlice.reducer;
