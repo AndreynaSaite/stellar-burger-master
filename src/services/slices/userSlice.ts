@@ -7,7 +7,6 @@ import {
   TRegisterData,
   updateUserApi
 } from '@api';
-
 import {
   createSlice,
   createAsyncThunk,
